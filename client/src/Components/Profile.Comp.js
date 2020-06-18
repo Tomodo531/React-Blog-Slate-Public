@@ -1,13 +1,18 @@
 import React from 'react';
 
+function calcAge(dateString) {
+	var birthday = +new Date(dateString);
+	return ~~((Date.now() - birthday) / 31557600000);
+}
+
 function Profile() {
 	return (
 		<div className="profile">
 			<img className="profile__image" loading="lazy" src={require('../Images/ProfilePic.jpg')} alt="" />
 			<h1 className="profile__name">Martin H. Olesen</h1>
 			<p className="profile__desc">
-				Hi, I'm Martin a 20 year old Danish programming student based i Copenhagen. I'm Currently attending TEC
-				Copenhagen and looking for place to intern so feel free to email me at{' '}
+				Hi, I'm Martin a {calcAge('November 16, 1999')} year old danish programming student based in Copenhagen.
+				I'm Currently attending TEC Copenhagen and looking for place to intern so feel free to email me at{' '}
 				<a
 					className="profile__link"
 					href="mailto:mho.workmail@gmail.com"
