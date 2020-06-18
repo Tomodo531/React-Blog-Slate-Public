@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { GlobalContext } from './Global.Context';
+import { GlobalContext } from '../Context/Global.Context';
 import Axios from 'axios';
 
 function Login() {

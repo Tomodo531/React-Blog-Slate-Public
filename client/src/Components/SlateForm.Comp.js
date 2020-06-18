@@ -7,7 +7,7 @@ import escapeHtml from 'escape-html';
 import { Slate, Editable, withReact } from 'slate-react';
 import { FaLink, FaBold, FaCode, FaHeading, FaImages, FaTimes } from 'react-icons/fa';
 import Axios from 'axios';
-import { GlobalContext } from './Global.Context';
+import { GlobalContext } from '../Context/Global.Context';
 
 const MarkCoverter = (children) => {
 	var result = '';

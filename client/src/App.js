@@ -3,7 +3,7 @@ import Profile from './Components/Profile.Comp';
 import Feed from './Components/Feed.Comp';
 import SlateTest from './Components/SlateForm.Comp';
 import Login from './Components/Login.Comp';
-import { GlobalProvider } from './Components/Global.Context';
+import { GlobalProvider } from './Context/Global.Context';
 import './App.css';
 
 function App() {

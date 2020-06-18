@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, Fragment } from 'react';
 import Interweave from 'interweave';
 import Axios from 'axios';
 import { FaRegTrashAlt } from 'react-icons/fa';
-import { GlobalContext } from './Global.Context';
+import { GlobalContext } from '../Context/Global.Context';
 import 'animate.css';
 
 function Feed() {
