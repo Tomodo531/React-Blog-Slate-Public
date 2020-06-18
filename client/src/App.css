@@ -1,0 +1,278 @@
+html {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #e8eaee;
+	color: #1d1d1f;
+	font-family: 'Roboto', sans-serif;
+}
+
+code {
+	background-color: #ebebeb;
+	color: #494949;
+}
+
+.container {
+	width: 95%;
+	max-width: 600px;
+	margin: auto;
+}
+
+.signInForm {
+	width: 220px;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	right: 0;
+	margin: 1em;
+}
+
+.signInForm__activator {
+	border: none;
+	cursor: pointer;
+	margin-left: auto;
+	padding: .5em 2em .5em 2em;
+	border-radius: .6em;
+	border: solid 1px #aaaaaa;
+	font-weight: 400;
+	background: transparent;
+	font-size: 16px;
+}
+
+.signInForm__error {
+	color: #f84747a6;
+	font-size: 14px;
+}
+
+.signInForm__form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	padding: 1em;
+	margin-top: 10px;
+	border-radius: .6em;
+	-webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+	transition: all 500ms ease;
+	overflow: hidden;
+}
+
+.signInForm__form label {
+	display: block;
+	font-size: .9em;
+	font-weight: 700;
+	padding: 1em 0 .5em 0;
+}
+
+.signInForm__form input {
+	width: calc(100% - 1em);
+	border: solid 1px #aaaaaa;
+	border-radius: .3em;
+	padding: .5em;
+}
+
+.signInForm__button {
+	width: 100%;
+	padding: .6em;
+	border: none;
+	border-radius: .6em;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.profile {
+	margin: 3em auto 3em auto;
+	text-align: center;
+	width: 90%;
+}
+
+.profile__image {
+	width: 40%;
+	min-width: 250px;
+	margin: 1em auto 1em auto;
+	-o-object-fit: contain;
+	object-fit: contain;
+	border-radius: .6em;
+}
+
+.profile__desc {
+	color: #656565;
+	font-weight: 500;
+	line-height: 1.5em;
+}
+
+.profile__link {
+	color: #2e13d6;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.profile span {
+	color: #656565;
+	font-weight: 900;
+}
+
+.postform {
+	position: relative;
+	border: solid 1px #aaaaaa;
+	border-radius: .6em;
+	padding: 1em;
+}
+
+.uploadPrgress {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: #e8eaee8a;
+	color: #4e4e4e;
+}
+
+.postform__toolbar {
+	display: flex;
+	align-items: center;
+	border-bottom: solid 1px #aaaaaa;
+	padding-bottom: .5em;
+}
+
+.postform__mediaPreviewContianer {
+	position: relative;
+	margin-bottom: .5em;
+}
+
+.postform__mediaPreviewClearButton {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	margin: .5em;
+	padding: .2em;
+	font-size: 25px;
+	cursor: pointer;
+	background-color: rgba(232, 234, 238, 0.747);
+	border-radius: 50%;
+}
+
+.postform__mediaPreview {
+	border-radius: .6em;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+}
+
+#postform__fileupload {
+	display: none;
+}
+
+.postform__toolbutton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+	border: none;
+	background: none;
+	border-radius: .3em;
+}
+
+.postform__submit {
+	margin-left: auto;
+	width: auto;
+	padding: .5em;
+	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
+	background-color: #d6d6d6;
+}
+
+.postform__toolbutton:hover {
+	background-color: #d6d6d6;
+	cursor: pointer;
+}
+
+.fullImage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	background: #e8eaee73;
+	cursor: url('./Images/close.svg'), auto;
+}
+
+.fullImage_image {
+	object-fit: contain;
+	border-radius: .6em;
+	max-width: 80%;
+	max-height: 80%;
+}
+
+.postError,
+.noPosts {
+	margin: auto;
+	text-align: center;
+}
+
+.postError {
+	color: #f84747;
+}
+
+.post {
+	margin: 3em auto 3em auto;
+	background-color: #fff;
+	padding: 1em;
+	border-radius: .6em;
+	font-weight: 400;
+	-webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+}
+
+.post__content {
+	padding: .5em 2em .5em 2em;
+	line-height: 1.5em;
+	color: #656565;
+}
+
+.post__media {
+	border-radius: .6em;
+	width: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+	cursor: pointer;
+}
+
+.post__content h2 {
+	color: #1d1d1f;
+	font-weight: 700;
+	font-size: 1.7em;
+}
+
+.post__link {
+	color: #2e13d6;
+	text-decoration: none;
+}
+
+.post__date {
+	padding-top: 1em;
+	color: #979797;
+}
+
+.post__delete {
+	cursor: pointer;
+	display: inline-block;
+	float: right;
+}
+/*# sourceMappingURL=BlogFrontend.css.map */
