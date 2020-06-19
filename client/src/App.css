@@ -270,9 +270,17 @@ code {
 	color: #979797;
 }
 
-.post__delete {
-	cursor: pointer;
+.post__options {
 	display: inline-block;
 	float: right;
+}
+
+.post__options svg {	
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.post__pin{
+	transform: rotate(45deg);
 }
 /*# sourceMappingURL=BlogFrontend.css.map */

@@ -1,28 +1,15 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 import Interweave from 'interweave';
 import Axios from 'axios';
-import { FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt, FaThumbtack } from 'react-icons/fa';
 import { GlobalContext } from '../Context/Global.Context';
 import 'animate.css';
 
 function Feed() {
-	const { postsState, isLoggedInState } = useContext(GlobalContext);
+	const { postsState, isLoggedInState, getPosts } = useContext(GlobalContext);
 	const [ posts, setPosts ] = postsState;
 	const [ isLoggedIn ] = isLoggedInState;
 	const [ fullImage, setFullImage ] = useState('');
-
-	useEffect(() => {
-		Axios.get('/posts')
-			.then((res) => {
-				setPosts(res.data);
-			})
-			.catch(() => {
-				setPosts({
-					error: true,
-					msg: 'Unable to get posts 📭'
-				});
-			});
-	}, []);
 
 	const removePost = (id) => {
 		Axios.post('/posts/remove/' + id, null, { withCredentials: true })
@@ -32,6 +19,14 @@ function Feed() {
 				});
 
 				setPosts(postRemove);
+			})
+			.catch((err) => console.log(err));
+	};
+
+	const pinPost = (id) => {
+		Axios.post('/posts/pin/' + id, null, { withCredentials: true })
+			.then(() => {
+				getPosts();
 			})
 			.catch((err) => console.log(err));
 	};
@@ -65,14 +60,14 @@ function Feed() {
 				</div>
 			) : (
 				posts.map((post) => (
-					<Post post={post} isLoggedIn={isLoggedIn} removePost={removePost} setFullImage={setFullImage} />
+					<Post post={post} isLoggedIn={isLoggedIn} removePost={removePost} pinPost={pinPost} setFullImage={setFullImage} />
 				))
 			)}
 		</Fragment>
 	);
 }
 
-function Post({ post, isLoggedIn, removePost, setFullImage }) {
+function Post({ post, isLoggedIn, removePost, pinPost, setFullImage }) {
 	return (
 		<div className="post animate__animated animate__fadeIn" key={post._id}>
 			{post.media !== null ? post.media.includes('webm') || post.media.includes('mp4') ? (
@@ -97,21 +92,25 @@ function Post({ post, isLoggedIn, removePost, setFullImage }) {
 				<Interweave content={post.content} />
 
 				<br />
-				<span className="post__date">{DateFormat(post.createdAt)}</span>
+				<span className="post__date">{DateFormat(post.createdAt)}{post.pined ? ' (Pinned)': ''}</span>
 
 				{isLoggedIn ? (
-					<div
-						className="post__delete"
-						onClick={() => {
-							if (
-								window.confirm(
-									"Are you sure you wish to delete this post? I've heard it's a good one..."
+					<div className="post__options">
+						<FaThumbtack
+							className="post__pin"
+							style={post.pined ? {fill: '#1a1a1a'}: null}
+							onClick={() => pinPost(post._id)}
+						/>
+						<FaRegTrashAlt 
+							onClick={() => {
+								if (
+									window.confirm(
+										"Are you sure you wish to delete this post? I've heard it's a good one..."
+									)
 								)
-							)
-								removePost(post._id);
-						}}
-					>
-						<FaRegTrashAlt />
+									removePost(post._id);
+							}}
+						/>
 					</div>
 				) : null}
 			</div>

@@ -11,7 +11,7 @@ const BUCKET = process.env.BUCKET;
 
 //GET: '/posts/'
 router.get('/', (req, res) => {
-	Post.find().sort({ createdAt: -1 }).then((posts) => res.json(posts)).catch((err) => res.status(400));
+	Post.find().sort({ pined: -1, createdAt: -1 }).then((posts) => res.json(posts)).catch((err) => res.status(400));
 });
 
 //POST: '/posts/add'
@@ -73,6 +73,18 @@ router.post('/add', verify, (req, res) => {
 		uploadPost();
 	}
 });
+
+router.post('/pin/:id', verify, (req, res) => {
+	Post.findById(req.params.id)
+		.then((post) => {
+			post.pined = !post.pined;
+
+			post.save()
+			.then(() => res.status(200).send('Post pined'))
+			.catch((err) => res.status(400).send(err))
+		})
+		.catch((err) => res.status(400).send(err));
+})
 
 router.post('/remove/:id', verify, (req, res) => {
 	Post.findById(req.params.id)

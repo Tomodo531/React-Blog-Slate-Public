@@ -107,7 +107,7 @@ const CustomEditor = {
 };
 
 const App = () => {
-	const { postsState, isLoggedInState } = useContext(GlobalContext);
+	const { postsState, isLoggedInState, getPosts } = useContext(GlobalContext);
 	const [ posts, setPosts ] = postsState;
 	const [ isLoggedIn ] = isLoggedInState;
 
@@ -142,12 +142,7 @@ const App = () => {
 				clearFileInput();
 				setUploadProcentage(0);
 
-				Axios.get('/posts').then((res) => setPosts(res.data)).catch((error) => {
-					setPosts({
-						error: true,
-						msg: 'Unable to get posts 📭'
-					});
-				});
+				getPosts();
 			})
 			.catch((err) => console.log(err));
 	};
