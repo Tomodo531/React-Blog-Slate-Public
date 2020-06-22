@@ -12,7 +12,7 @@ export const GlobalProvider = (props) => {
 	}, [])
 
 	const getPosts = () => {
-		Axios.get('http://localhost:5000/posts')
+		Axios.get('/posts')
 			.then((res) => {
 				setPosts(res.data);
 			})
