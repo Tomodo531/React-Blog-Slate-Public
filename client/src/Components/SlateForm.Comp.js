@@ -20,7 +20,7 @@ const MarkCoverter = (children) => {
 		} else if (child.link) {
 			result += '<a href="' + child.text + '">' + child.text + '</a>';
 		} else if (child.code) {
-			result += '<code>' + child.text + '</code>';
+			result += '<pre><code>' + child.text + '</code></pre>';
 		} else {
 			result += child.text;
 		}
@@ -107,7 +107,7 @@ const CustomEditor = {
 };
 
 const App = () => {
-	const { postsState, isLoggedInState, getPosts } = useContext(GlobalContext);
+	const { postsState, isLoggedInState, getPosts, alert } = useContext(GlobalContext);
 	const [ posts, setPosts ] = postsState;
 	const [ isLoggedIn ] = isLoggedInState;
 
@@ -119,7 +119,10 @@ const App = () => {
 
 	const SubmitPost = (content) => {
 		if (content === '<p></p>' && file === null)
-			return alert("It's not possible to make a post without text or an image/video");
+			return alert({
+				type: 'ERROR_ALERT',
+				alertText: 'It is not possible to make a post without text or an image/video'
+			});
 
 		const newPost = new FormData();
 
@@ -143,8 +146,20 @@ const App = () => {
 				setUploadProcentage(0);
 
 				getPosts();
+
+				alert({
+					type: 'SUCCESS_ALERT',
+					alertText: 'Post was successfully uploaded'
+				});
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				setUploadProcentage(0);
+				console.log(err);
+				alert({
+					type: 'ERROR_ALERT',
+					alertText: 'Something went wrong whilst uploading post try again later'
+				});
+			});
 	};
 
 	const clearFileInput = () => {
@@ -306,7 +321,11 @@ const Leaf = (props) => {
 	}
 
 	if (props.leaf.code) {
-		return <code {...props.attributes}>{props.children}</code>;
+		return (
+			<pre>
+				<code {...props.attributes}>{props.children}</code>
+			</pre>
+		);
 	}
 
 	if (props.leaf.link) {

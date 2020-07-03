@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
-var fs = require('fs');
 let Post = require('../models/post.model');
 const verify = require('./verifyToken');
 var AWS = require('aws-sdk');
@@ -55,7 +54,7 @@ router.post('/add', verify, async (req, res) => {
 	});
 
 	const uploadPost = () => {
-		post.save().then(() => res.status(200).json('Post added')).catch((err) => res.status(404));
+		post.save().then(() => res.status(200).json('Post added')).catch((err) => res.status(400));
 	};
 
 	if (req.files !== null) {
@@ -102,8 +101,10 @@ router.post('/add', verify, async (req, res) => {
 				console.log(`aws s3 upload ERROR: ${err}`);
 				res.status(400).json('Unable to upload media');
 			});
-	} else {
+	} else if (req.body.content !== '<p></p>') {
 		uploadPost();
+	} else {
+		res.status(400).json('It is not allow to post a empty post').send();
 	}
 });
 

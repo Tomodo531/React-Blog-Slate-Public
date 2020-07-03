@@ -3,7 +3,7 @@ import { GlobalContext } from '../Context/Global.Context';
 import Axios from 'axios';
 
 function Login() {
-	const { isLoggedInState } = useContext(GlobalContext);
+	const { isLoggedInState, alert } = useContext(GlobalContext);
 	const [ isLoggedIn, setIsLoggedIn ] = isLoggedInState;
 
 	const [ signInFormAct, setSignInFormAct ] = useState(false);
@@ -20,22 +20,30 @@ function Login() {
 		Axios.post('/user/isLoggedIn', null, { withCredentials: true })
 			.then((res) => {
 				setIsLoggedIn(res.data.loggedIn);
+				alert({ type: 'SUCCESS_ALERT', alertText: 'Signed in' });
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const SignOut = () => {
 		Axios.post('/user/logout', null, { withCredentials: true })
 			.then((res) => {
 				setIsLoggedIn(!isLoggedIn);
+				alert({ type: 'SUCCESS_ALERT', alertText: 'Signed out' });
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				alert({ type: 'ERROR_ALERT', alertText: 'Unable to sign out try again later' });
+			});
 	};
 
 	const onSubmitSignIn = (e) => {
 		e.preventDefault();
 
-		if (email === '' || password === '') return setSignInError('*Please fill out all Fields');
+		if (email === '' || password === '')
+			return alert({ type: 'ERROR_ALERT', alertText: 'Please fill out all Fields' });
 
 		const LoginInfo = {
 			email: email,
@@ -52,9 +60,13 @@ function Login() {
 					setSignInError('');
 				} else {
 					setSignInError(res.data.msg);
+					alert({ type: 'ERROR_ALERT', alertText: 'Email or password is wrong' });
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				alert({ type: 'ERROR_ALERT', alertText: 'Unable to sign in try again later' });
+			});
 	};
 
 	if (isLoggedIn) {

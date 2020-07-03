@@ -17,6 +17,7 @@ code {
 .container {
 	width: 95%;
 	max-width: 600px;
+	min-height: calc(100vh - 195px);
 	margin: auto;
 }
 
@@ -121,6 +122,10 @@ code {
 	border: solid 1px #aaaaaa;
 	border-radius: .6em;
 	padding: 1em;
+}
+
+.postform p {
+	min-height: 21px;
 }
 
 .uploadPrgress {
@@ -242,8 +247,15 @@ code {
 
 .post__content {
 	padding: .5em 2em .5em 2em;
+	word-wrap: break-word;
 	line-height: 1.5em;
 	color: #656565;
+}
+
+@media (max-width: 600px) {
+	.post__content {
+		padding: .5em 1em .5em 1em;
+	}
 }
 
 .post__media {
@@ -271,16 +283,102 @@ code {
 }
 
 .post__options {
-	display: inline-block;
+	display: block;
 	float: right;
 }
 
-.post__options svg {	
+.post__options svg {
 	margin-left: 10px;
 	cursor: pointer;
 }
 
-.post__pin{
+.post__pin {
 	transform: rotate(45deg);
+}
+
+.footer {
+	margin: auto;
+	text-align: center;
+	width: 100%;
+	opacity: .8;
+}
+
+.footer__link {
+	color: #2e13d6;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.footer p {
+	color: #656565;
+	font-weight: 500;
+	line-height: 1.5em;
+}
+
+.alerts {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	width: 100%;
+	max-width: 400px;
+}
+
+.alert {
+	animation: alertAnimation 5s forwards;
+	background: #fff;
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 10px 10px 10px 15px;
+	margin: 10px;
+	-webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.3);
+	border-radius: .3em;
+}
+
+.alert svg {
+	margin-right: 10px;
+}
+
+.alert__text {
+	word-wrap: break-word;
+	max-width: 295px;
+}
+
+.alert__color {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	display: block;
+	height: 100%;
+	width: 3px;
+	border-top-left-radius: .3em;
+	border-bottom-left-radius: .3em;
+}
+
+.alert__close {
+	display: flex;
+	padding: 5px 0 5px 0;
+	background: transparent;
+	border: none;
+	margin-left: auto;
+}
+
+@keyframes alertAnimation {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 /*# sourceMappingURL=BlogFrontend.css.map */

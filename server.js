@@ -7,7 +7,7 @@ app.use(express.json());
 const cors = require('cors');
 app.use(
 	cors({
-		origin: 'http://localhost:3000' || 'https://blog-react-slate.herokuapp.com',
+		origin: 'http://localhost:3000' || 'http://blog-react-slate.herokuapp.com',
 		credentials: true
 	})
 );

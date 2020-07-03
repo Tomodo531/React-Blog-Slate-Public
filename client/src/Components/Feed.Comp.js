@@ -6,7 +6,7 @@ import { GlobalContext } from '../Context/Global.Context';
 import 'animate.css';
 
 function Feed() {
-	const { postsState, isLoggedInState, getPosts } = useContext(GlobalContext);
+	const { postsState, isLoggedInState, getPosts, alert } = useContext(GlobalContext);
 	const [ posts, setPosts ] = postsState;
 	const [ isLoggedIn ] = isLoggedInState;
 	const [ fullImage, setFullImage ] = useState('');
@@ -19,16 +19,36 @@ function Feed() {
 				});
 
 				setPosts(postRemove);
+				alert({
+					type: 'SUCCESS_ALERT',
+					alertText: 'Post successfully removed'
+				});
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				alert({
+					type: 'ERROR_ALERT',
+					alertText: 'Something went wrong whilst removing post try again later'
+				});
+			});
 	};
 
 	const pinPost = (id) => {
 		Axios.post('/posts/pin/' + id, null, { withCredentials: true })
 			.then(() => {
 				getPosts();
+				alert({
+					type: 'SUCCESS_ALERT',
+					alertText: 'Pin status successfully changed'
+				});
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				alert({
+					type: 'ERROR_ALERT',
+					alertText: 'Something went wrong whilst pinning post try again later'
+				});
+			});
 	};
 
 	return (
@@ -60,7 +80,13 @@ function Feed() {
 				</div>
 			) : (
 				posts.map((post) => (
-					<Post post={post} isLoggedIn={isLoggedIn} removePost={removePost} pinPost={pinPost} setFullImage={setFullImage} />
+					<Post
+						post={post}
+						isLoggedIn={isLoggedIn}
+						removePost={removePost}
+						pinPost={pinPost}
+						setFullImage={setFullImage}
+					/>
 				))
 			)}
 		</Fragment>
@@ -92,16 +118,19 @@ function Post({ post, isLoggedIn, removePost, pinPost, setFullImage }) {
 				<Interweave content={post.content} />
 
 				<br />
-				<span className="post__date">{DateFormat(post.createdAt)}{post.pined ? ' (Pinned)': ''}</span>
+				<span className="post__date">
+					{DateFormat(post.createdAt)}
+					{post.pined ? ' (Pinned)' : ''}
+				</span>
 
 				{isLoggedIn ? (
 					<div className="post__options">
 						<FaThumbtack
 							className="post__pin"
-							style={post.pined ? {fill: '#1a1a1a'}: null}
+							style={post.pined ? { fill: '#1a1a1a' } : null}
 							onClick={() => pinPost(post._id)}
 						/>
-						<FaRegTrashAlt 
+						<FaRegTrashAlt
 							onClick={() => {
 								if (
 									window.confirm(

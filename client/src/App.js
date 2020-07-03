@@ -3,6 +3,7 @@ import Profile from './Components/Profile.Comp';
 import Feed from './Components/Feed.Comp';
 import SlateTest from './Components/SlateForm.Comp';
 import Login from './Components/Login.Comp';
+import Footer from './Components/Footer.Comp';
 import { GlobalProvider } from './Context/Global.Context';
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
 				<SlateTest />
 				<Feed />
 			</div>
+			<Footer />
 		</GlobalProvider>
 	);
 }
