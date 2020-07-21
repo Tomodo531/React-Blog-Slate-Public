@@ -25,7 +25,7 @@ code {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 100;
 	width: 100%;
 	height: 100%;
 	cursor: pointer;
@@ -39,7 +39,7 @@ code {
 	flex-direction: column;
 	top: 0;
 	right: 0;
-	z-index: 2;
+	z-index: 101;
 	margin: 1em;
 }
 
@@ -224,7 +224,7 @@ code {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 102;
 	width: 100vw;
 	height: 100vh;
 	background: #e8eaee73;
@@ -333,6 +333,7 @@ code {
 	bottom: 0;
 	right: 0;
 	left: 0;
+	z-index: 103;
 	margin: auto;
 	width: 100%;
 	max-width: 400px;
