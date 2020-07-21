@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
 import { GlobalContext } from '../Context/Global.Context';
 import Axios from 'axios';
+import 'animate.css';
 
 function Login() {
 	const { isLoggedInState, alert } = useContext(GlobalContext);
@@ -79,36 +80,48 @@ function Login() {
 		);
 	} else {
 		return (
-			<div className="signInForm">
-				<button className="signInForm__activator" onClick={() => setSignInFormAct(!signInFormAct)}>
-					Sign In
-				</button>
+			<Fragment>
 				<div
-					className="signInForm__form"
-					style={signInFormAct ? { opacity: '1', height: '220px' } : { opacity: '0', height: '0px' }}
-				>
-					<form onSubmit={onSubmitSignIn}>
-						<span className="signInForm__error">{signInError}</span>
+					className="closeSignInForm animate__animated animate__fadeIn animate__faster"
+					onClick={() => setSignInFormAct(!signInFormAct)}
+					style={signInFormAct ? { display: 'block' } : { display: 'none' }}
+				/>
+				<div className="signInForm">
+					<button className="signInForm__activator" onClick={() => setSignInFormAct(!signInFormAct)}>
+						{signInFormAct ? 'Close' : 'Sign In'}
+					</button>
+					<div
+						className="signInForm__form"
+						style={signInFormAct ? { opacity: '1', height: '220px' } : { opacity: '0', height: '0px' }}
+					>
+						<form onSubmit={onSubmitSignIn}>
+							<span className="signInForm__error">{signInError}</span>
 
-						<label htmlFor="form__email">Email:</label>
-						<input type="text" id="form__email" value={email} onChange={(e) => setEmail(e.target.value)} />
+							<label htmlFor="form__email">Email:</label>
+							<input
+								type="text"
+								id="form__email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 
-						<label htmlFor="form__password">Password:</label>
-						<input
-							type="password"
-							id="form__password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<br />
-						<br />
+							<label htmlFor="form__password">Password:</label>
+							<input
+								type="password"
+								id="form__password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<br />
+							<br />
 
-						<button className="signInForm__button" type="submit">
-							Sign In
-						</button>
-					</form>
+							<button className="signInForm__button" type="submit">
+								Sign In
+							</button>
+						</form>
+					</div>
 				</div>
-			</div>
+			</Fragment>
 		);
 	}
 }

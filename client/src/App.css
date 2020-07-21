@@ -21,6 +21,17 @@ code {
 	margin: auto;
 }
 
+.closeSignInForm {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
 .signInForm {
 	width: 220px;
 	position: absolute;
@@ -28,6 +39,7 @@ code {
 	flex-direction: column;
 	top: 0;
 	right: 0;
+	z-index: 2;
 	margin: 1em;
 }
 
@@ -41,6 +53,7 @@ code {
 	font-weight: 400;
 	background: transparent;
 	font-size: 16px;
+	width: 120px;
 }
 
 .signInForm__error {
